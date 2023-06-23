@@ -800,7 +800,7 @@ class LinuxInstaller extends AbstractInstaller
         $sdk_dir = $options->sdk_dir;
         $ext_dir = $options->ext_dir;
         $debug_arg = $options->debug ? '-d' : '';
-
+        $this->inform("${dir}/build.sh ${debug_arg} '${sdk_dir}'");
         if (!$options->skip_build) {
             $this->verbose("Building PHP extension...");
             system("${dir}/build.sh ${debug_arg} '${sdk_dir}'");
@@ -813,8 +813,8 @@ class LinuxInstaller extends AbstractInstaller
             $this->copyFiles("${sdk_dir}/lib", $ext_dir);
         }
 
-        //$ext_file = "${dir}/build/modules/ton_client.so";
-        $ext_file = "${sdk_dir}/lib/libton_client.so";
+        $ext_file = "${dir}/build/modules/ton_client.so";
+        //$ext_file = "${sdk_dir}/lib/libton_client.so";
         if (!file_exists($ext_file)) {
             $this->error("Cannot find TON Client PHP extension file ${ext_file}.");
         }
